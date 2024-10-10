@@ -1,0 +1,39 @@
+CREATE TABLE manager_register (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    fullname VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+     position varchar (50) not null
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE manager_login (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    username VARCHAR(50),
+    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    success TINYINT(1),
+    FOREIGN KEY (user_id) REFERENCES lyn(id),
+    position varchar (50) not null
+);
+
+
+CREATE TABLE `inventory` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,   -- Unique ID for each inventory entry
+    `product_name` VARCHAR(255) NOT NULL,   -- Name of the product
+    `quantity` INT(11) NOT NULL,            -- Quantity of the product
+    `storage_type` ENUM('Freezer', 'Fridge', 'Room Temperature') NOT NULL,  -- Type of storage (ENUM for predefined values)
+    `expiration_date` DATE NOT NULL,        -- Expiration date of the product
+    `date_received` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Date when the product was added, auto-generated
+    PRIMARY KEY (`id`));                     -- Primary key for unique 
+    
+CREATE TABLE `release_history` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,   -- Unique ID for each release history entry
+    `product_name` VARCHAR(255) NOT NULL,   -- Name of the product
+    `quantity` INT(11) NOT NULL,            -- Quantity released
+    `date_released` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- Date of release
+    `storage_type` ENUM('Freezer', 'Fridge', 'Room Temperature') NOT NULL,  -- Type of storage at the time of release
+    PRIMARY KEY (`id`)                      -- Primary key for unique identification
+);
+
+
